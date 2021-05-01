@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: actix-web-demo
-        image: 448935049451.dkr.ecr.us-west-2.amazonaws.com/actix-web-demo:7792630a
+        image: 448935049451.dkr.ecr.us-west-2.amazonaws.com/actix-web-demo:a9985ec7
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
