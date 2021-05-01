@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actix-web-demo
+  namespace: eks-example
+  labels:
+    app: actix-web-demo
+  annotations:
+    # Container Image Automated Updates
+    flux.weave.works/automated: "true"
+    # do not apply this manifest on the cluster
+    #flux.weave.works/ignore: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: actix-web-demo
+  template:
+    metadata:
+      labels:
+        app: actix-web-demo
+    spec:
+      containers:
+      - name: actix-web-demo
+        image: 448935049451.dkr.ecr.us-west-2.amazonaws.com/actix-web-demo:7792630a
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
